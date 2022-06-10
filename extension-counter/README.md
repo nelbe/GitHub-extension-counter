@@ -33,6 +33,17 @@ See the documentation:
  - https://docs.github.com/en/rest/overview/resources-in-the-rest-api
  - https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
 
+You can test the app without making an API request. To do this you must add the following code in the extension-counter/src/components/ExtensionCounter/ExtensionCounter.js file:
+- Import the helper array called pathsExample:
+import { pathsExample } from '../Helpers/pathsExample';
+- Add the following code/function:
+  const testF = () => {
+    pathsExample.map(path => {
+      paths.push(path.split('.').pop())
+    })
+  }
+- Add the function testF() inside of the useEffect.
+ 
 ### Executing program
 
 In the project directory /extension-counter, you can run:

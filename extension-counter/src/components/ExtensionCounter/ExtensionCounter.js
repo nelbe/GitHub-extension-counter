@@ -18,7 +18,7 @@ const ExtensionCounter = () => {
     const checkFiles = (filesToCheck) => {
       filesToCheck?.map(file => {
         if (file.type !== 'tree' && file.path) {
-          tempPaths.push(file.path.split('.').pop()); //This will return the extension without a dot prefix
+          tempPaths.push(file.path.split('.').pop()); // This will return the extension without a dot prefix
         } else if (file.type === 'tree') {
           fetch(file.url)
             .then((res) => res.json())
@@ -36,16 +36,6 @@ const ExtensionCounter = () => {
       checkFiles(files);
     }
   }, [files]);
-
-  // REMOVE THIS PART (IT'S JUST FOR TEST)
-  // In helper folder you can find and array called pathsExample to test the appalication.
-  // You just need to import testF, uncomment the testF function in this code and call it inside the useEffect
-  // const testF = () => {
-  //   const test = [];
-  //   pathsExample.map(path => {
-  //     paths.push(path.split('.').pop())
-  //   })
-  // }
 
   const searchGitHub = () => {
     fetch(`https://api.github.com/repos/${owner}/${repository}/git/trees/master`, { // I'm using master as branch parameter 
