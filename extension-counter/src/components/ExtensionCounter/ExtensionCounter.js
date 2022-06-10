@@ -40,9 +40,9 @@ const ExtensionCounter = () => {
   const searchGitHub = () => {
     fetch(`https://api.github.com/repos/${owner}/${repository}/git/trees/master`, { // I'm using master as branch parameter 
       method: 'GET',
-      headers: new Headers({
-        'Authorization': 'token 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',
-      })
+      // headers: new Headers({
+      //   'Authorization': 'token personal_token', // You must add your personal token
+      // })
     })
       .then(res => res.json())
       .then(json => {
