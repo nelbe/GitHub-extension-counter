@@ -12,9 +12,9 @@ It is a basic project to show the extensions that a github project has. As well 
 
 Make sure have installed:
  - [material-ui v5.8.3](https://mui.com/material-ui/getting-started/installation/)
- - [Node.js](https://nodejs.org)
- - [`npm`](https://npmjs.com)
-We support Node >= 10.13 (and recommend the _even_ versions of Node). Afterwards, install the dependencies by running `npm install`:
+ - [Node.js](https://nodejs.org) The project supports Node >= 10.13 (and recommend the _even_ versions of Node).
+ - [npm](https://npmjs.com)
+ Afterwards, install the dependencies by running `npm install`.
 
 ### Installing
 
