@@ -19,6 +19,17 @@ const Result = ({ paths }) => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
 
   useEffect(() => {
+    const countPaths = () => {
+      const counts = {};
+      paths?.forEach(function (x) { counts[x] = (counts[x] || 0) + 1; });
+  
+      const tempRows = [];
+      for (const [key, value] of Object.entries(counts)) {
+        tempRows.push(createData(key, value))
+      }
+  
+      setRows(tempRows);
+    }
     countPaths();
   }, [paths]);
 
@@ -39,18 +50,6 @@ const Result = ({ paths }) => {
 
   const createData = (path, count) => {
     return { path, count };
-  }
-
-  const countPaths = () => {
-    const counts = {};
-    paths?.forEach(function (x) { counts[x] = (counts[x] || 0) + 1; });
-
-    const tempRows = [];
-    for (const [key, value] of Object.entries(counts)) {
-      tempRows.push(createData(key, value))
-    }
-
-    setRows(tempRows);
   }
 
   const descendingComparator = (a, b, orderBy) => {

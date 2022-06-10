@@ -14,6 +14,24 @@ const ExtensionCounter = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
+    let tempPaths = [];
+    const checkFiles = (filesToCheck) => {
+      filesToCheck?.map(file => {
+        if (file.type !== 'tree' && file.path) {
+          tempPaths.push(file.path.split('.').pop()); //This will return the extension without a dot prefix
+        } else if (file.type === 'tree') {
+          fetch(file.url)
+            .then((res) => res.json())
+            .then((json) => {
+              checkFiles(json.tree)
+            })
+        }
+        return tempPaths;
+      });
+
+      setPaths([...tempPaths]);
+    }
+
     if (files) {
       checkFiles(files);
     }
@@ -48,23 +66,6 @@ const ExtensionCounter = () => {
         }
       })
       .catch(error => setErrorMessage(`Something was wrong: ${error}`));
-  }
-
-  let tempPaths = [];
-  const checkFiles = (filesToCheck) => {
-    filesToCheck?.map(file => {
-      if (file.type !== 'tree' && file.path) {
-        tempPaths.push(file.path.split('.').pop()); //This will return the extension without a dot prefix
-      } else if (file.type === 'tree') {
-        fetch(file.url)
-          .then((res) => res.json())
-          .then((json) => {
-            checkFiles(json.tree)
-          })
-      }
-    });
-
-    setPaths([...tempPaths]);
   }
 
   return (
