@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { ResultContent } from './ExtensionCounter.style';
+import { ResultContent, tHeadStyle, thStyle, tBodyStyle, tdStyle } from './ExtensionCounter.style';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { visuallyHidden } from '@mui/utils';
 import TablePagination from '@mui/material/TablePagination';
 import TableSortLabel from '@mui/material/TableSortLabel';
 import Box from '@mui/material/Box';
@@ -91,10 +90,11 @@ const Result = ({ paths }) => {
     };
 
     return (
-      <TableHead>
+      <TableHead style={tHeadStyle}>
         <TableRow>
           {headCells.map((headCell) => (
             <TableCell
+              style={thStyle}
               key={headCell.id}
               align={headCell.numeric ? 'right' : 'left'}
               padding={headCell.disablePadding ? 'none' : 'normal'}
@@ -106,11 +106,6 @@ const Result = ({ paths }) => {
                 onClick={createSortHandler(headCell.id)}
               >
                 {headCell.label}
-                {orderBy === headCell.id ? (
-                  <Box component='span' sx={visuallyHidden}>
-                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                  </Box>
-                ) : null}
               </TableSortLabel>
             </TableCell>
           ))}
@@ -148,7 +143,6 @@ const Result = ({ paths }) => {
       <TableContainer>
         <Table
           key='tableCounter'
-          sx={{ minWidth: 750 }}
           aria-labelledby='tableTitle'
           size={'small'}
         >
@@ -160,7 +154,7 @@ const Result = ({ paths }) => {
             onRequestSort={handleRequestSort}
             rowCount={rows.length}
           />
-          <TableBody>
+          <TableBody style={tBodyStyle}>
             {/* if you don't need to support IE11, you can replace the `stableSort` call with:
                    rows.slice().sort(getComparator(order, orderBy)) */}
             {stableSort(rows, getComparator(order, orderBy))
@@ -168,8 +162,8 @@ const Result = ({ paths }) => {
               .map((row, index) => {
                 return (
                   <TableRow key={index}>
-                    <TableCell key={`${row.path}-${index}`} align='right'>{row.path}</TableCell>
-                    <TableCell key={`${row.count}-${index}`} align='right'>{row.count}</TableCell>
+                    <TableCell style={tdStyle} key={`${row.path}-${index}`} align='right'>{row.path}</TableCell>
+                    <TableCell style={tdStyle} key={`${row.count}-${index}`} align='right'>{row.count}</TableCell>
                   </TableRow>
                 );
               })}
