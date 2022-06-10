@@ -20,7 +20,6 @@ export const formContent = {
 export const ResultContent = {
     textAlign: 'center',
     width: '80%',
-    height: '400px',
     margin: '0 auto',
     boxShadow: `rgba(0, 0, 0, 0.25) 0px 54px 55px,
                 rgba(0, 0, 0, 0.12) 0px -12px 30px,

@@ -6,22 +6,28 @@ import { form, formContent } from './ExtensionCounter.style';
 import Result from './ResultContent';
 import { testPaths } from '../Helpers';
 
-const paths = [];
 const ExtensionCounter = () => {
   const [owner, setOwner] = useState('');
   const [repository, setRepository] = useState('argo-site');
   const [files, setFiles] = useState();
+  const [paths, setPaths] = useState([]);
 
   useEffect(() => {
+    testF()
     if (files) {
       checkFiles(files);
     }
   }, [files]);
 
   // REMOVE THIS PART (IT'S JUST FOR TEST)
-  testPaths.map(path =>{
-    paths.push(path.split('.').pop())
-  })
+  
+  const testF = () => {
+    const test = [];
+    testPaths.map(path =>{
+      paths.push(path.split('.').pop())
+    })
+  }
+  
 
   const searchGitHub = () => {
     fetch(`https://api.github.com/repos/${owner}/${repository}/git/trees/master`, {
@@ -36,22 +42,22 @@ const ExtensionCounter = () => {
       })
   }
 
+
+  let tempPaths = [];
   const checkFiles = (filesToCheck) => {
-    console.log('filesToCheck', filesToCheck)
     filesToCheck?.map(file => {
       if (file.type !== 'tree' && file.path) {
-        paths.push(file.path.split('.').pop()); //This will return the extension without a dot prefix
+        tempPaths.push(file.path.split('.').pop()); //This will return the extension without a dot prefix
       } else if (file.type === 'tree') {
         fetch(file.url)
           .then((res) => res.json())
           .then((json) => {
-            console.log('json', json)
-
             checkFiles(json.tree)
           })
       }
-    })
-    console.log('paths', paths)
+    });
+
+    setPaths([...tempPaths]);
   }
 
   return (
@@ -66,10 +72,10 @@ const ExtensionCounter = () => {
         >
           <TextField id="standard-basic" label="Owner" variant="standard" value={owner} onInput={e => setOwner(e.target.value)} />
           <TextField id="standard-basic" label="Repository" variant="standard" value={repository} onInput={e => setRepository(e.target.value)} />
-          <Button variant="contained" onClick={(e) => searchGitHub()}>Buscar</Button>
+          <Button variant="contained" onClick={() => searchGitHub()}>Buscar</Button>
         </Box>
       </div>
-      {paths ? <Result paths={paths} /> : ''}
+      <Result paths={paths} />
     </>
   );
 }
