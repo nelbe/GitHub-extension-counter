@@ -1,12 +1,54 @@
-# Getting Started with Create React App
+# EXTENSION COUNTER
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Description
 
-## Available Scripts
+The project has been createrd with [create-react-app](https://create-react-app.dev/).
 
-In the project directory, you can run:
+It is a basic project to show the extensions that a github project has. As well as the number of times each extension is repeated. 
 
-### `npm start`
+## Getting Started
+
+### Dependencies
+
+Make sure have installed:
+ - [material-ui v5.8.3](https://mui.com/material-ui/getting-started/installation/)
+ - [Node.js](https://nodejs.org)
+ - [`npm`](https://npmjs.com)
+We support Node >= 10.13 (and recommend the _even_ versions of Node). Afterwards, install the dependencies by running `npm install`:
+
+### Installing
+
+Clone the repository in your local.
+
+The projects uses master branch as default branch parameter in the request, but it can be modified to set the branch.
+Patch: extension-counter/src/components/ExtensionCounter/ExtensionCounter.js.
+
+To have no limit on requests, you must log in to GitHub and use your personal token in the request, like a this:
+    headers: new Headers({
+        'Authorization': 'token personal_token',
+    }).
+Patch: extension-counter/src/components/ExtensionCounter/ExtensionCounter.js
+
+See the documentation:
+ - https://docs.github.com/en/rest/overview/resources-in-the-rest-api
+ - https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token
+
+You can test the app without making an API request. To do this you must add the following code in the extension-counter/src/components/ExtensionCounter/ExtensionCounter.js file:
+- Import the helper array called pathsExample:
+import { pathsExample } from '../Helpers/pathsExample';
+- Add the following code/function:
+  const testF = () => {
+    pathsExample.map(path => {
+      paths.push(path.split('.').pop())
+    })
+  }
+- Add the function testF() inside of the useEffect.
+ 
+### Executing program
+
+In the project directory /extension-counter, you can run:
+
+`npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
@@ -14,57 +56,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
+## License
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the [Belén] License 
